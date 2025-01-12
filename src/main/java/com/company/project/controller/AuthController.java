@@ -1,7 +1,10 @@
 package com.company.project.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,12 +13,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.company.project.model.NoticiaModel;
 import com.company.project.model.UsuarioModel;
+
+import com.company.project.service.NoticiaService;
 import com.company.project.service.UsuarioService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+
 
 
 
@@ -27,6 +32,9 @@ public class AuthController {
 	
 	@Autowired
 	UsuarioService usuarioService;
+	
+	@Autowired
+	NoticiaService noticiaService;
 	
 	@PostMapping(value="login")
 	public String login() {
@@ -49,10 +57,15 @@ public class AuthController {
 		return usuarioService.Validar(us);
 	}
 	
-	/*@PostMapping(value = "noticia/crear")
-	public NoticiaModel crearNoticia(@RequestBody NoticiaModel us, @RequestParam MultipartFile img) {
-		System.out.print(us);
-		//return usuarioService.Crear(us);
-	}*/
+	@PostMapping(value = "noticia/crear")
+	public NoticiaModel crearNoticia(@RequestBody NoticiaModel nt) {
+		System.out.print(nt);
+		return noticiaService.save(nt);
+	}
+	
+	@GetMapping(value="ver/noticias")
+	public List<NoticiaModel> verNoticias(){
+		return noticiaService.verNoticias();
+	}
 	
 }

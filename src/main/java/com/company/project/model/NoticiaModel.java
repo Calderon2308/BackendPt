@@ -1,6 +1,7 @@
 package com.company.project.model;
 
 import java.io.File;
+import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -23,6 +24,9 @@ public class NoticiaModel {
 	
 	@Column
 	private String descripcion;
+	
+	@Column
+	private Date fecha_creacion;
 	
 	@Column
 	private File contenido;
@@ -51,6 +55,14 @@ public class NoticiaModel {
 		this.descripcion = descripcion;
 	}
 
+	public Date getFechaCreacion() {
+		return fecha_creacion;
+	}
+
+	public void setFechaCreacion(Date fechaCreacion) {
+		this.fecha_creacion = fechaCreacion;
+	}
+
 	public File getContenido() {
 		return contenido;
 	}
@@ -59,5 +71,4 @@ public class NoticiaModel {
 		this.contenido = contenido;
 	}
 	
-
 }
